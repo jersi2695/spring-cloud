@@ -24,7 +24,7 @@ public class ProductoController {
 	
 	@GetMapping("/detalle/{id}")
 	public Producto detalle(@PathVariable(name = "id") Long id) {
-		return productoService.findById(id).get();
+		return productoService.findById(id);
 	}
 
 }
