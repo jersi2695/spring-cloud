@@ -1,8 +1,10 @@
 package com.springboot.app.productos.controllers;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,15 +18,24 @@ public class ProductoController {
 	@Autowired
 	private IProductoService productoService;
 	
+	@Autowired
+	private Environment enviroment;
+	
 	
 	@GetMapping("/listar")
 	public List<Producto> listar(){
-		return productoService.findAll();
+		return productoService.findAll().stream().
+				map(x -> {
+					x.setPort(Integer.parseInt(enviroment.getProperty("local.server.port")));
+					return x;
+				}).collect(Collectors.toList());
 	}
 	
 	@GetMapping("/detalle/{id}")
 	public Producto detalle(@PathVariable(name = "id") Long id) {
-		return productoService.findById(id).get();
+		Producto producto =  productoService.findById(id).get();
+		producto.setPort(Integer.parseInt(enviroment.getProperty("local.server.port")));
+		return producto;
 	}
 
 }
