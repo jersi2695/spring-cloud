@@ -1,13 +1,11 @@
-package com.springboot.app.item.models;
+package com.springboot.app.item.models.entity;
 
 public class Item {
 	
 	private Producto producto;
 	
 	private Integer cantidad;
-	
-	private Double total;
-	
+		
 	public Item() {}
 
 	public Item(Producto producto, int cantidad) {
@@ -35,9 +33,6 @@ public class Item {
 		return producto.getPrecio() * cantidad.doubleValue();
 	}
 
-	public void setTotal(Double total) {
-		this.total = total;
-	}
 	
 	
 	
