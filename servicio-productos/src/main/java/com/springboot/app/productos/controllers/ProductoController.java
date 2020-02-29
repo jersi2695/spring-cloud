@@ -33,7 +33,7 @@ public class ProductoController {
 	
 	@GetMapping("/detalle/{id}")
 	public Producto detalle(@PathVariable(name = "id") Long id) {
-		Producto producto =  productoService.findById(id).get();
+		Producto producto =  productoService.findById(id);
 		producto.setPort(Integer.parseInt(enviroment.getProperty("local.server.port")));
 		return producto;
 	}
