@@ -5,7 +5,6 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.env.Environment;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,10 +17,7 @@ public class ProductoController {
 	
 	@Autowired
 	private IProductoService productoService;
-	
-	@Autowired
-	private Environment enviroment;
-	
+		
 	@Value("${server.port}")
 	private Integer port;
 	
@@ -36,9 +32,16 @@ public class ProductoController {
 	}
 	
 	@GetMapping("/detalle/{id}")
-	public Producto detalle(@PathVariable(name = "id") Long id) {
+	public Producto detalle(@PathVariable(name = "id") Long id){
 		Producto producto =  productoService.findById(id);
 		producto.setPort(port);
+		
+//		try {
+//			Thread.sleep(2000L);
+//		} catch (InterruptedException e) {
+//			e.printStackTrace();
+//		}
+				
 		return producto;
 	}
 
