@@ -35,10 +35,7 @@ public class ItemController {
 	
 	@Value("${configuracion.texto}")
 	private String texto;
-	
-	@Value("${server.port}")
-	private String puerto;
-	
+		
 	@GetMapping(path = "/listar")
 	public List<Item> listar(){
 		return itemService.findAll();
@@ -63,7 +60,7 @@ public class ItemController {
 	}
 	
 	@GetMapping("/obtener-config")
-	public ResponseEntity<?> obtenerConfig(){
+	public ResponseEntity<?> obtenerConfig(@Value("${server.port}") String puerto){
 		
 		log.info(texto);
 		
