@@ -30,4 +30,22 @@ public class ItemServiceFeign implements IItemService {
 		return new Item(producto, cantidad);
 	}
 
+	@Override
+	public Producto save(Producto producto) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Producto update(Producto producto, Long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void delete(Long id) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

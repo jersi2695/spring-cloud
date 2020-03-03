@@ -7,6 +7,9 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -31,6 +34,31 @@ public class ItemServiceImpl implements IItemService {
 		parameters.put("id", id.toString());
 		Producto producto = clienteRest.getForObject("http://servicio-productos/detalle/{id}" , Producto.class, parameters);
 		return new Item(producto, cantidad);
+	}
+
+	@Override
+	public Producto save(Producto producto) {
+		
+		HttpEntity<Producto> body = new HttpEntity<Producto>(producto);
+		
+		ResponseEntity<Producto> resposeProducto = clienteRest.exchange("http://servicio-productos/crear", HttpMethod.POST, body, Producto.class);
+		return resposeProducto.getBody();
+	}
+
+	@Override
+	public Producto update(Producto producto, Long id) {
+		HttpEntity<Producto> body = new HttpEntity<Producto>(producto);
+		Map<String, String> parameters = new HashMap<String, String>();
+		parameters.put("id", id.toString());
+		ResponseEntity<Producto> resposeProducto = clienteRest.exchange("http://servicio-productos/editar/{id}", HttpMethod.PUT, body, Producto.class, parameters);
+		return resposeProducto.getBody();
+	}
+
+	@Override
+	public void delete(Long id) {
+		Map<String, String> parameters = new HashMap<String, String>();
+		parameters.put("id", id.toString());
+		clienteRest.delete("http://servicio-productos/eliminar/{id}", parameters);		
 	}
 
 }
