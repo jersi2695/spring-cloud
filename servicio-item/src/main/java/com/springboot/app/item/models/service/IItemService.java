@@ -3,7 +3,7 @@ package com.springboot.app.item.models.service;
 import java.util.List;
 
 import com.springboot.app.item.models.entity.Item;
-import com.springboot.app.item.models.entity.Producto;
+import com.springboot.app.commons.model.entity.Producto;
 
 public interface IItemService {
 
