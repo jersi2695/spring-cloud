@@ -2,8 +2,8 @@ package com.springboot.app.usuarios.model.dao;
 
 import org.springframework.data.repository.PagingAndSortingRepository;
 
-import com.springboot.app.usuarios.model.entity.Rol;
+import com.springboot.app.commons.usuarios.model.entity.Role;
 
-public interface IRolDao extends PagingAndSortingRepository<Rol, Long> {
+public interface IRoleDao extends PagingAndSortingRepository<Role, Long> {
 
 }
